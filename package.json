@@ -1,0 +1,21 @@
+{
+  "name": "proxy.visa",
+  "version": "1.0.0",
+  "description": "proxy server, ussd + web server, blockchain",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon ."
+  },
+  "keywords": [
+    "proxy",
+    "application",
+    "server"
+  ],
+  "author": "Cris Cirhuza",
+  "license": "ISC",
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.7"
+  }
+}
