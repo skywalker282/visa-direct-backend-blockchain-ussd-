@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const VisaCoin = require("../utils/initBlockchain");
 const Transaction = require("../model/transaction");
 
 exports.getTransaction = (req, res, next) => {
@@ -18,12 +19,16 @@ exports.getOneTransaction = (req, res, next) => {
 };
 
 exports.postTransaction = (req, res, next) => {
-  let { date, amount, sender, recipient } = req.body;
+  let { amount, sender, recipient } = req.body;
   let newTransaction = new Transaction();
-  newTransaction.date = date;
+  newTransaction.date = Date().toString();
   newTransaction.amount = parseInt(amount);
   newTransaction.sender = sender;
   newTransaction.recipient = recipient;
+
+  VisaCoin().then((blockchain) => {
+    blockchain.createTransaction(newTransaction);
+  });
 
   newTransaction.save((result) => {
     res.json({

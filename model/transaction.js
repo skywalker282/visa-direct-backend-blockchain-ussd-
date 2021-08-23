@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 
 const transactioSchema = new Schema({
   date: {
-    type: String,
+    type: Date,
+    default: Date.now,
     required: true,
   },
   amount: {
@@ -20,6 +21,11 @@ const transactioSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
+  },
+  status: {
+    type: String,
+    required: true,
+    default: "pending",
   },
 });
 
