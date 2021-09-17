@@ -5,11 +5,15 @@ const transaction = require("./transaction");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    fullName: {
+    userName: {
         type: String,
         required: true,
     },
-    accountNumber: {
+    password: {
+        type: String,
+        required: true
+    },
+    cardNumber: {
         type: Number,
         required: true,
         unique: true,

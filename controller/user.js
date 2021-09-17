@@ -17,12 +17,31 @@ exports.getOneUser = (req, res, next) => {
   });
 };
 
+exports.logUser = (req, res, next) => {
+  User.findOne({ "userName": req.params.userName, "cardNumber": req.params.userCardNumber, "password": req.params.userPassword},((err, result) => {
+    if(result) {
+        res.json({
+          message: "User found in the database",
+          payload: result,
+          status: 100
+        })
+      } else {
+        res.json({
+          message: 'User not found',
+          status: 900
+        })
+      }
+    }))
+}
+
 exports.postUser = (req, res, next) => {
-  let { fullName, accountNumber } = req.body;
+  console.log(req.body)
+  let { userName, cardNumber, password } = req.body;
   let newUser = new User();
 
-  newUser.fullName = fullName;
-  newUser.accountNumber = parseInt(accountNumber);
+  newUser.userName = userName;
+  newUser.cardNumber = cardNumber;
+  newUser.password = password;
 
   newUser.save((result) => {
     res.json({
@@ -34,10 +53,11 @@ exports.postUser = (req, res, next) => {
 
 exports.editUser = (req, res, next) => {
   User.findById(req.params.id).then((result) => {
-    let { fullName, accountNumber } = req.body;
+    let { userName, cardNumber, password } = req.body;
 
-    result.fullName = fullName || result.fullName;
-    result.accountNumber = accountNumber || result.accountNumber;
+    result.full = userName || result.userName;
+    result.cardNumber = cardNumber || result.cardNumber;
+    result.password = password || result.password
     result.save().then((result) => {
       res.json({
         message: "User successfuly",

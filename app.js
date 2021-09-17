@@ -15,7 +15,7 @@ app.use(transactionRouter);
 app.use(userRouter);
 app.use(USSDRouter);
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 7000;
 
 mongoose
   .connect(
